@@ -7,5 +7,42 @@
     <link rel="stylesheet" href="styless.css" />
     <script src="main.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <div class="popup hide">
+      <form action="">
+        <div>
+          <label for="player">Player</label>
+          <input type="text" id="player" />
+        </div>
+        <div>
+          <p>Opponent:</p>
+          <div class="container-option">
+            <div class="option">
+              <input type="radio" name="opponent" id="player2" />
+              <label for="player2">Player</label>
+            </div>
+            <div class="option">
+              <input type="radio" name="opponent" id="comp" />
+              <label for="comp">Computer</label>
+            </div>
+          </div>
+        </div>
+        <button>Play</button>
+      </form>
+    </div>
+    <div class="container">
+      <button>New game</button>
+      <div class="board">
+        <button value="0"></button>
+        <button value="1"></button>
+        <button value="2"></button>
+        <button value="3"></button>
+        <button value="4"></button>
+        <button value="5"></button>
+        <button value="6"></button>
+        <button value="7"></button>
+        <button value="8"></button>
+      </div>
+    </div>
+  </body>
 </html>
