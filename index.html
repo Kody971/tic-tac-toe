@@ -8,30 +8,39 @@
     <script src="main.js" defer></script>
   </head>
   <body>
-    <div class="popup hide">
+    <!-- <div class="menu">
       <form action="">
         <div>
           <label for="player">Player</label>
-          <input type="text" id="player" />
+          <input type="text" name="player1" id="player" />
         </div>
         <div>
           <p>Opponent:</p>
           <div class="container-option">
             <div class="option">
-              <input type="radio" name="opponent" id="player2" />
+              <input type="radio" name="opponent" id="player2" value="p2" />
               <label for="player2">Player</label>
             </div>
             <div class="option">
-              <input type="radio" name="opponent" id="comp" />
+              <input type="radio" name="opponent" id="comp" value="comp" />
               <label for="comp">Computer</label>
             </div>
           </div>
+          <input class="p2" type="text" id="opponent" />
         </div>
         <button>Play</button>
       </form>
-    </div>
+    </div> -->
     <div class="container">
-      <button>New game</button>
+      <h1>Tic Tac Toe</h1>
+      <div class="utility">
+        <button class="new">New Game</button>
+        <button class="next">Next</button>
+      </div>
+      <div class="score">
+        <p class="p1">Player1 (X): 0</p>
+        <p class="p2">Player2 (O): 0</p>
+      </div>
       <div class="board">
         <button value="0"></button>
         <button value="1"></button>
