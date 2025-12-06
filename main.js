@@ -1,6 +1,8 @@
 const Gameboard = (() => {
   let gameboard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   let count = 0;
+  let p1;
+  let p2;
 
   const Player = (name) => {
     let score = 0;
@@ -38,12 +40,19 @@ const Gameboard = (() => {
 
   const checkMark = (mark) => {
     if (mark == "X") {
+      p1.addScore();
       setTimeout(() => {
         alert("Player 1 wins!");
       }, 50);
+      endGame();
     } else {
-      alert("Player 2 wins!");
+      p2.addScore();
+      setTimeout(() => {
+        alert("Player 2 wins!");
+      }, 50);
+      endGame();
     }
+    updateScore(p1, p2);
   };
 
   const checkWinner = () => {
@@ -74,10 +83,24 @@ const Gameboard = (() => {
       case gameboard[2] == gameboard[4] && gameboard[4] == gameboard[6]:
         checkMark(gameboard[2]);
         break;
+      default:
+        if (gameboard.every((el) => isNaN(el))) {
+          setTimeout(() => {
+            alert("Draw!");
+          }, 50);
+          endGame();
+        }
     }
   };
 
-  const reset = () => {
+  const endGame = () => {
+    const btn = document.querySelectorAll(".board button");
+    btn.forEach((button) =>
+      button.removeEventListener("click", addTicTacToeChoice)
+    );
+  };
+
+  const newGame = () => {
     window.location.reload();
   };
 
@@ -87,26 +110,42 @@ const Gameboard = (() => {
     renderTicTacToeBtn();
   };
 
+  const start = (event) => {
+    event.preventDefault();
+
+    const data = event.target;
+    const player1 = data.elements.p1.value;
+    const player2 = data.elements.p2.value;
+
+    p1 = Player(player1);
+    p2 = Player(player2);
+
+    const menu = document.querySelector(".menu");
+    menu.classList.add("hide");
+
+    updateScore(p1, p2);
+  };
+
+  const updateScore = (player1, player2) => {
+    const p1Score = document.querySelector(".p1");
+    p1Score.textContent = `${p1.name} (X): ${p1.getScore()}`;
+    const p2Score = document.querySelector(".p2");
+    p2Score.textContent = `${p2.name} (O): ${p2.getScore()}`;
+  };
+
   const btn = document.querySelectorAll(".board button");
   btn.forEach((button) => button.addEventListener("click", addTicTacToeChoice));
 
-  const newGame = document.querySelector(".new");
-  newGame.addEventListener("click", reset);
+  const newGameBtn = document.querySelector(".new");
+  newGameBtn.addEventListener("click", newGame);
 
-  const next = document.querySelector(".next");
-  next.addEventListener("click", nextGame);
+  const nextBtn = document.querySelector(".next");
+  nextBtn.addEventListener("click", nextGame);
+
+  const form = document.querySelector("form");
+  form.addEventListener("submit", start);
 
   // make a menu to create player, so player object can be used
-
-  // const start = (even) => {
-  //   const player2 = document.querySelector("#opponent");
-  //   const menu = document.querySelector(".menu");
-
-  //   const data = even.target;
-  //   const player1 = data.elements.player1.value;
-  //   const opponent =
-  //     data.elements.opponent.value == "comp" ? "comp" : player2.value;
-  // };
 
   // const form = document.querySelector("form");
   // form.addEventListener(start);
